@@ -10,26 +10,35 @@ $(document).ready(function () {
     operation = "Find Last";
     $("#clear").click(clearResults);
 
-    $(".dropdown-menu li a").click(function(){
+    $(".dropdown-menu a").click(function(){
 	console.log("pick!"+$(this).text());
-	$(this).parents(".btn-group").find('.selection').text($(this).text());
-	operation=$(this).text();
-	changeOperation(operation);
+	if ( $(this).hasClass("main-menu") ) {
+	    $(this).parents(".dropdown").find('.selection').text($(this).text());
+	    operation=$(this).text();
+	    console.log("Main-menu");
+	    changeOperation(operation);	    
+	} else if ($(this).hasClass("add-item")) {
+	    $(this).parents(".dropdown").find('.selection').text($(this).text());
+	    console.log($(this).text());
+	} else if ($(this).hasClass("edit-item")) {
+	    $(this).parents(".dropdown").find('.selection').text($(this).text());
+	    console.log($(this).text());
+	} 	
     });
-
-
 });
 
 changeOperation(operation);
 
 function changeOperation(operation){
     if(operation=="Add Entry"){
+	console.log("Add Entry");
 	$('#addmessage').empty();
 	$('.inputdata').show();
 	$('.searchbox').hide();
 	$('.results').hide();
 	$('.editdata').hide();}
     else{
+	console.log("not add entry");
 	$('.editdata').hide();
 	$('.inputdata').hide();
 	$('.results').show();
@@ -59,18 +68,19 @@ function buildTable(list) {
 }
 
 function processEdit(){
+    console.log("edit data");
     $('#searchresults').empty();
     $('.editdata').show();
     $("#edit-btn").click(editEntry);
     console.log("Edit Record: " + $(this).attr('ID'));
     var row=$(this).parents("tr");
-    console.log("First name of record: "+ $(row).find('.first').text());
+    console.log("First name of record: "+ $(row).find('.first').text()+":"+$(row).find('.type').text());
     editid=$(this).attr('ID');
 
     $('#editfirst').val( $(row).find('.first').text());
     $('#editlast').val( $(row).find('.last').text());
     $('#editphone').val( $(row).find('.phone').text());
-    $('#edittype').val( $(row).find('.type').text());
+    $('#edittype').text( $(row).find('.type').text());
 }
 
 function editDone() {
@@ -81,7 +91,7 @@ function editEntry(){
     console.log("Firstname:" + $('#editfirst').val() + "ID:" + editid);
     $('#searchresults').empty();
     $.ajax({
-	url: '/cgi-bin/skon_phoneAppComplete.cgi?editid='+editid +'&editfname='+$('#editfirst').val()+'&editlname='+$('#editlast').val()+'&editphone='+$('#editphone').val()+'&edittype='+$('#edittype').val()+'&operation=edit',
+	url: '/cgi-bin/skon_phoneAppComplete.cgi?editid='+editid +'&editfname='+$('#editfirst').val()+'&editlname='+$('#editlast').val()+'&editphone='+$('#editphone').val()+'&edittype='+$('#edittype').text()+'&operation=edit',
 	dataType: 'text',
 	success: editDone(),
 	error: function(){alert("Error: Something went wrong");}
@@ -101,15 +111,11 @@ function processDelete(){
     });
 }
 function processResults(results) {
-    $('#editmessage').empty();
-    $('#addmessage').empty();
     console.log("Results:"+results);
     $('#searchresults').empty();
     $('#searchresults').append(buildTable(results));
     $(".edit").click(processEdit);
     $(".delete").click(processDelete);
-    $('#addmessage').text($('#addfirst').val()+" "+$('#addlast').val()+ " ADDED");
-    
 }
 
 function clearResults() {
@@ -127,17 +133,27 @@ function getMatches(){
     });
 }
 
+function processAdd(results) {
+    $('#addmessage').empty();
+    console.log("Add:",results);
+    $('#addmessage').text($('#addfirst').val()+" "+$('#addlast').val()+ " ADDED");
+    $('#addfirst').val('');
+    $('#addlast').val('');
+    $('#addphone').val('');
+    
+}
+
 function addEntry(){
     console.log("Attempting to add an entry");
     console.log("Firstname:" + $('#addfirst').val());
     $('#searchresults').empty();
     $.ajax({
-	url: '/cgi-bin/skon_phoneAppComplete.cgi?afname='+$('#addfirst').val()+'&alname='+$('#addlast').val()+'&aphone='+$('#addphone').val()+'&atype='+$('#addtype').val()+'&operation='+operation,
+	url: '/cgi-bin/skon_phoneAppComplete.cgi?afname='+$('#addfirst').val()+'&alname='+$('#addlast').val()+'&aphone='+$('#addphone').val()+'&atype='+$('#addtype').text()+'&operation='+operation,
 	dataType: 'text',
-	success: processResults,
+	success: processAdd,
 	error: function(){alert("Error: Something went wrong");}
     });
 }
-    
+
 
     

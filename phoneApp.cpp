@@ -31,7 +31,7 @@ int main() {
   logfile.open("skonphone.log",ios::out | ios::app);
   logfile << "Op:" << operation << endl;
   logfile.close();
-  string output = "Error =- Operation not support yet!";
+  string output = "Error = "+operation+ " - Operation not support yet!";
   if (operation == "Find Last") {
     form_iterator searchString = cgi.getElement("find");
     string search = **searchString;

@@ -13,7 +13,7 @@ PhoneBook::PhoneBook() {
     std::auto_ptr<sql::Statement> stmt(con->createStatement());
 
     vector<PhoneEntry> list;
-    stmt->execute("CALL find_last('%"+last+"%')");
+    stmt->execute("SELECT * FROM Phonebook WHERE Last like '%"+last+"%'");
     std::auto_ptr< sql::ResultSet > res;
     do {
       res.reset(stmt->getResultSet());
@@ -37,7 +37,7 @@ vector<PhoneEntry> PhoneBook::findByFirst(string first) {
   std::auto_ptr<sql::Statement> stmt(con->createStatement());
 
   vector<PhoneEntry> list;
-  stmt->execute("CALL find_first('%"+first+"%')");
+  stmt->execute("SELECT * FROM Phonebook WHERE First like '%"+first+"%'");
   std::auto_ptr< sql::ResultSet > res;
   do {
     res.reset(stmt->getResultSet());
@@ -59,7 +59,7 @@ vector<PhoneEntry> PhoneBook::findByType(string type) {
   std::auto_ptr<sql::Statement> stmt(con->createStatement());
 
   vector<PhoneEntry> list;
-  stmt->execute("CALL find_type('"+type+"')");
+  stmt->execute("SELECT * FROM Phonebook WHERE Type like '%"+type+"%'");
   std::auto_ptr< sql::ResultSet > res;
   do {
     res.reset(stmt->getResultSet());
@@ -83,7 +83,7 @@ void PhoneBook::addEntry(string first,string last,string phone, string type){
   if(type != "Friend" && type != "Family" && type!="Business"){
       type="Other";
   }
-  stmt->execute("CALL add_entry('"+first+"','"+last+"','"+phone+"','"+type+"')");
+  stmt->execute("INSERT INTO Phonebook(First,Last,Phone,Type) VALUES ('"+first+"','"+last+"','"+phone+"','"+type+"')");
 }
 
 
@@ -95,7 +95,7 @@ void PhoneBook::editEntry(string idnum,string first,string last,string phone, st
   if(type != "Friend" && type != "Family" && type!="Business"){
     type="Other";
   }
-  stmt->execute("CALL edit_entry('"+idnum+"','"+first+"','"+last+"','"+phone+"','"+type+"')");
+  stmt->execute("UPDATE Phonebook SET First = '"+first+"', Last ='"+last+"', Phone ='"+phone+"', Type ='"+type+"' WHERE ID='"+idnum+"'");
 }
 
 
@@ -105,5 +105,5 @@ void PhoneBook::deleteEntry(string idnum){
   con->setSchema(database);
   std::auto_ptr<sql::Statement> stmt(con->createStatement());
 
-  stmt->execute("CALL delete_entry('"+idnum+"')");
+  stmt->execute("DELETE FROM Phonebook WHERE ID='"+idnum+"'");
 }

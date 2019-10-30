@@ -46,7 +46,7 @@ int main(){
     }
 
  
-
+    /*
     cout << "Enter type to find:";
     string typeMatch;
     cin >> typeMatch;
@@ -59,6 +59,7 @@ int main(){
 	   << pbResults.at(i).type
 	   << endl;
     }
+
     cout <<"Enter a first name to add";
     string first,last,phone,type;
     cin >> first;
@@ -72,7 +73,7 @@ int main(){
     pb.addEntry(first,last,phone,type);
     cout << "Entry added";
     
-    
+
     string first,last,phone,type, IDnum;
     cout << "Enter an ID number to edit";
     cin >> IDnum;
@@ -86,13 +87,13 @@ int main(){
     cin >> type;
     pb.editEntry(IDnum,first,last,phone,type);
     cout << "Attempted to edit";
-    */
 
+    */
     string IDnum;
     cout << "Enter an ID number to delete";
     cin >> IDnum;
     pb.deleteEntry(IDnum);
     cout << "Attempted delete";
-    
+ 
 return 0;}
 

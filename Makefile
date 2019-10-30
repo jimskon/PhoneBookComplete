@@ -50,4 +50,4 @@ PutHTML:
 	ls -l /var/www/html/class/ssd/$(USER)/PhoneAppComplete
 
 clean:
-	rm -f *.o  phoneApp 
+	rm -f *.o  phoneApp TestPhoneBook

@@ -17,7 +17,7 @@ int main(){
 
     cout << "Phone Book test program" << endl;
 
-    /*    cout << "Enter first name to find:";
+    cout << "Enter first name to find:";
     string firstMatch;
     cin >> firstMatch;
     
@@ -30,7 +30,7 @@ int main(){
 	     << pbResults.at(i).type
 	     << endl;
     }
-
+    /*
     cout << "Enter last name to find:";
     string lastMatch;
     cin >> lastMatch;
@@ -88,12 +88,12 @@ int main(){
     pb.editEntry(IDnum,first,last,phone,type);
     cout << "Attempted to edit";
 
-    */
+    
     string IDnum;
     cout << "Enter an ID number to delete";
     cin >> IDnum;
     pb.deleteEntry(IDnum);
     cout << "Attempted delete";
- 
+    */
 return 0;}
 

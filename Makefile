@@ -27,7 +27,7 @@ TestPhoneBook.o: TestPhoneBook.cpp PhoneEntry.h	PhoneBook.h
 TestPhoneBook: TestPhoneBook.o PhoneBook.o PhoneEntry.o
 	$(CC) TestPhoneBook.o PhoneBook.o PhoneEntry.o -L/usr/lib -o TestPhoneBook -L/usr/local/lib -lcgicc -lmysqlcppconn
 
-phoneApp.o: phoneApp.cpp 
+phoneApp.o: phoneApp.cpp
 	$(CC) -c $(CFLAGS) phoneApp.cpp
 
 phoneApp: phoneApp.o PhoneBook.o PhoneEntry.o
@@ -35,7 +35,7 @@ phoneApp: phoneApp.o PhoneBook.o PhoneEntry.o
 
 PutCGI: phoneApp
 	chmod 757 phoneApp
-	cp phoneApp /usr/lib/cgi-bin/$(USER)_phoneAppComplete.cgi 
+	cp phoneApp /usr/lib/cgi-bin/$(USER)_phoneAppComplete.cgi
 
 	echo "Current contents of your cgi-bin directory: "
 	ls -l /usr/lib/cgi-bin/
@@ -47,7 +47,7 @@ PutHTML:
 
 
 	echo "Current contents of your HTML directory: "
-	ls -l /var/www/html/class/ssd/$(USER)/PhoneAppComplete
+	ls -l /var/www/html/class/softdev/$(USER)/PhoneAppComplete
 
 clean:
 	rm -f *.o  phoneApp TestPhoneBook

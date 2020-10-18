@@ -19,9 +19,9 @@
 #define PHONEBOOK_H
 
 #define HOST "localhost"
-#define USER "skon"
-#define DB "PhoneAppDB"
-#define PASS "PhilanderChase"
+#define USER "test"
+#define DB "test"
+#define PASS "KenyonTest2020"
 
 using namespace std;
 
@@ -39,8 +39,7 @@ private:
     const string user=USER;
     const string database=DB;
     const string pass=PASS;
-    
+
 };
 
 #endif /* PHONEBOOK_H */
-

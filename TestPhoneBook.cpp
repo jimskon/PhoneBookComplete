@@ -18,7 +18,7 @@ int main(){
 
     cout << "Phone Book test program" << endl;
 
-    cout << "Seect an option (1-serach first, 2-search last, 3-search type, 4-add, 5-edit, 6-delete, 7-end): ";
+    cout << "Select an option (1-serach first, 2-search last, 3-search type, 4-add, 5-edit, 6-delete, 7-end): ";
     cin >> o;
 
     while (o!='7') {

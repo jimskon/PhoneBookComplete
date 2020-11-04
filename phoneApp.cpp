@@ -28,7 +28,7 @@ int main() {
   // Create AJAX objects to recieve information from web page.
   form_iterator op = cgi.getElement("operation");
   string operation = **op;
-  logfile.open("skonphone.log",ios::out | ios::app);
+  logfile.open("/home/fifo/skonphone.log",ios::out | ios::app);
   logfile << "Op:" << operation << endl;
   logfile.close();
   string output = "Error = "+operation+ " - Operation not support yet!";
